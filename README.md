@@ -9,7 +9,7 @@ Arquivos principais:
 - `src/Fork.java` — representa um garfo (recurso) usando `ReentrantLock`.
 - `src/Philosopher.java` — classe que implementa o comportamento do filósofo (Runnable).
 
-Estratégias implementadas (mencionar explicitamente — para apresentação):
+Estratégias implementadas:
 - Butler (Mordomo) — padrão: Semaphore (controle de recursos)
   - Técnica: limitar em N-1 o número de filósofos que podem tentar pegar garfos simultaneamente.
   - Evita deadlock pois não permite que todos os filósofos segurem um garfo e esperem pelo outro.
@@ -25,11 +25,6 @@ Estratégias implementadas (mencionar explicitamente — para apresentação):
   - Semelhante ao comportamento de `timeout` em requisições HTTP: não esperamos indefinidamente por um recurso.
   - Vantagens: evita deadlock sem precisar de um mordomo central; fácil de relacionar com timeouts em requests/IO; demonstra `tryLock` e backoff.
   - Observação: exigência de tratamento de `InterruptedException`; backoff reduz chance de livelock.
-
-Observações de implementação (OOP e boas práticas):
-- Cada garfo é um objeto `Fork` com seu próprio `ReentrantLock`.
-- `Philosopher` é um `Runnable` independente; estratégia injetada via enum.
-- Código documentado em Português do Brasil para facilitar a apresentação.
 
 Como compilar e executar (Windows, `cmd.exe`):
 
@@ -58,14 +53,3 @@ java -cp src Main ordering
 ```
 java -cp src Main trylock
 ```
-
-Dicas para o vídeo de apresentação (o que evidenciar):
-- Explique o problema e os pontos de contenção (por que dois garfos etc.).
-- Mostre no código onde a técnica/padrão foi aplicada:
-  - `Semaphore` no `Main` e uso dele em `Philosopher#doWithButler` (diga "Butler / Mordomo").
-  - Ordenação de recursos em `Philosopher#doWithOrdering` (diga "Resource Hierarchy / ordenação de recursos").
-  - Uso de `ReentrantLock` em `Fork` (diga "cada garfo é um monitor/lock").
-  - `tryLock` em `Fork.tryPick(...)` e `Philosopher#doWithTryLockTimeout` (diga "timeout/backoff, semelhante a timeouts de requisição HTTP").
-- Rode as duas estratégias no vídeo e comente as diferenças observadas.
-
-Licença: código para uso educacional.
