@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Representa um garfo como um recurso compartilhado.
- * Utiliza ReentrantLock para controlar exclusão mútua.
  */
 public class Fork {
     private final ReentrantLock lock = new ReentrantLock();

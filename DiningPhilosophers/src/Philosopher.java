@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Filósofo representado como uma Thread (Runnable).
  * Cada filósofo alterna entre pensar e comer.
- * Implementa duas estratégias para evitar deadlock:
+ * Implementa três estratégias para evitar deadlock:
  *  - BUTLER: usa um Semaphore (N-1) para limitar filósofos concorrentes.
  *  - RESOURCE_HIERARCHY: adota ordenação de recursos (pegar garfo de menor id primeiro).
  *  - TRYLOCK-TIMEOUT: utiliza do recurso de timeout (tempo excedido) para determinar se um Filósofo pegou ou não os dois garfos.
